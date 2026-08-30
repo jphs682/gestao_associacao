@@ -110,16 +110,11 @@ A aplicação será desenvolvida seguindo uma arquitetura web baseada em camadas
 | ------------------- | --------------------------------- |
 | **Java 21**         | Linguagem principal               |
 | **Spring Boot**     | Desenvolvimento do backend        |
-| **Spring Data JPA** | Persistência dos dados            |
-| **Hibernate**       | ORM                               |
 | **PostgreSQL**      | Banco de dados                    |
 | **HTML**            | Estrutura das páginas             |
 | **CSS**             | Estilização                       |
 | **JavaScript**      | Interações da interface           |
 | **Bootstrap**       | Componentes e layout              |
-| **Maven**           | Gerenciamento do projeto          |
-| **Spring Security** | Autenticação e controle de acesso |
-| **JUnit**           | Testes                            |
 | **Git**             | Controle de versão                |
 | **GitHub**          | Hospedagem do código              |
 
@@ -168,15 +163,15 @@ Um associado poderá possuir várias contribuições registradas.
 sistema-associacao/
 │
 ├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── ...
-│   │   └── resources/
-│   │       ├── static/
-│   │       ├── templates/
-│   │       └── application.properties
-│   │
-│   └── test/
+│   ├─ main/
+│      ├── java/
+│      │   └── ...
+│      └── resources/
+│          ├── static/
+│          ├── templates/
+│          └── application.properties
+│   
+│    
 │
 ├── docs/
 │
@@ -194,7 +189,6 @@ sistema-associacao/
 Antes de executar o projeto, será necessário ter instalado:
 
 * Java 21 ou superior;
-* Maven;
 * PostgreSQL;
 * Git.
 
@@ -225,32 +219,6 @@ spring.jpa.show-sql=false
 ```
 
 > As configurações utilizadas no ambiente de desenvolvimento não devem conter senhas ou informações sensíveis diretamente no repositório.
-
-### Executar
-
-Com Maven:
-
-```bash
-./mvnw spring-boot:run
-```
-
-Ou, caso o Maven esteja instalado globalmente:
-
-```bash
-mvn spring-boot:run
-```
-
----
-
-## 🧪 Testes
-
-Os testes automatizados serão desenvolvidos utilizando **JUnit**.
-
-Para executar os testes:
-
-```bash
-./mvnw test
-```
 
 ---
 
