@@ -201,8 +201,8 @@ Antes de executar o projeto, será necessário ter instalado:
 ### Clonar o repositório
 
 ```bash
-git clone URL_DO_REPOSITORIO
-cd sistema-associacao
+git clone https://github.com/jphs682/gestao_associacao.git
+cd gestao_associacao
 ```
 
 ### Configurar o banco de dados
