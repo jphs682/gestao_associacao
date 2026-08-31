@@ -1,8 +1,10 @@
+Claro — abaixo está o conteúdo em Markdown puro, pronto para copiar e colar diretamente em um arquivo README.md.
+
 Sistema de Gestão de Associações
 
 Sistema web para cadastro e gerenciamento de associados e controle de contribuições de associações comunitárias.
 
-O projeto é desenvolvido no contexto da Licenciatura em Computação, com foco em tecnologia, inclusão digital e desenvolvimento comunitário. A proposta busca aplicar conhecimentos de programação, banco de dados, desenvolvimento web e engenharia de software na resolução de uma necessidade real de uma associação comunitária.
+O projeto é desenvolvido no contexto da Licenciatura em Computação, com foco em tecnologia, inclusão digital e desenvolvimento comunitário.
 
 📋 Sobre o projeto
 
@@ -20,15 +22,10 @@ Contribuições — registro e consulta dos pagamentos realizados pelos associad
 O desenvolvimento será realizado de forma participativa, considerando as necessidades identificadas junto à associação parceira.
 
 🎓 Contexto acadêmico
-
 Área temática: Tecnologia e Produção
-
 Área de conhecimento: Ciência da Computação / Licenciatura em Computação
-
 Área de extensão: Tecnologia, inclusão digital e desenvolvimento comunitário
-
 Tipo de projeto: Extensão universitária
-
 🎯 Objetivo geral
 
 Desenvolver e avaliar uma solução computacional para auxiliar uma associação comunitária na organização do cadastro de seus associados e no controle de suas contribuições, promovendo a informatização de processos administrativos e a aplicação prática dos conhecimentos adquiridos na Licenciatura em Computação.
@@ -59,7 +56,7 @@ Membros da comunidade;
 Futuras diretorias da associação.
 📦 Escopo da primeira versão
 
-A primeira versão do sistema será limitada a dois módulos principais.
+A primeira versão do sistema será limitada a dois módulos principais:
 
 👤 Módulo de Associados
 
@@ -185,9 +182,6 @@ Bootstrap	Componentes e layout
 Git	Controle de versão
 GitHub	Hospedagem do código
 📁 Estrutura prevista do projeto
-
-A estrutura poderá seguir uma organização semelhante à apresentada abaixo:
-
 sistema-gestao-associacoes/
 │
 ├── src/
@@ -459,8 +453,6 @@ cd sistema-gestao-associacoes
 
 Crie um banco de dados PostgreSQL para o projeto.
 
-Exemplo:
-
 CREATE DATABASE associacoes;
 
 
@@ -469,7 +461,7 @@ Depois, configure as credenciais do banco no arquivo:
 src/main/resources/application.properties
 
 
-Exemplo de configuração:
+Exemplo:
 
 spring.datasource.url=jdbc:postgresql://localhost:5432/associacoes
 spring.datasource.username=postgres
@@ -480,7 +472,7 @@ spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
 
 
-As configurações acima são apenas um exemplo para ambiente de desenvolvimento. As credenciais reais não devem ser versionadas no repositório.
+Importante: as credenciais reais do banco de dados não devem ser versionadas no repositório.
 
 4. Executar a aplicação
 
@@ -498,9 +490,6 @@ Ou, caso o Maven esteja instalado globalmente:
 
 mvn spring-boot:run
 
-
-Após iniciar a aplicação, ela poderá ser acessada pelo navegador no endereço configurado pelo projeto.
-
 🔀 Controle de versão
 
 O projeto utiliza Git para controle de versão e GitHub para hospedagem do código-fonte.
@@ -517,12 +506,6 @@ main
  │    └── feature/interface
  │
  └── releases
-
-📝 Status do projeto
-
-Em desenvolvimento 🚧
-
-O projeto está sendo desenvolvido de forma incremental. Novas funcionalidades, correções e melhorias serão incorporadas conforme o levantamento de requisitos e a avaliação realizada junto à associação parceira.
 
 🗺️ Roadmap
 Fase 1 — Levantamento
@@ -584,3 +567,8 @@ A licença do projeto deverá ser definida de acordo com as orientações da ins
 
 Durante o desenvolvimento acadêmico, sugestões e melhorias podem ser registradas por meio das Issues e Pull Requests do repositório.
 
+📌 Status do projeto
+
+Em desenvolvimento 🚧
+
+Os requisitos, modelos, funcionalidades e estrutura técnica poderão ser modificados durante o desenvolvimento conforme as necessidades identificadas junto à associação parceira.
