@@ -16,10 +16,12 @@ Este projeto propõe o desenvolvimento de uma solução computacional para centr
 
 A primeira versão será composta por dois módulos principais:
 
-* **Associados** — gerenciamento dos dados cadastrais e da situação dos associados.
+* **Associados** — gerenciamento dos dados cadastrais, da situação e do histórico de vida associativa.
 * **Contribuições** — registro e consulta dos pagamentos realizados pelos associados.
 
 O desenvolvimento será realizado de forma participativa, considerando as necessidades identificadas junto à associação parceira.
+
+Em 3 de setembro de 2026 foi realizada a primeira conversa com a vice-diretora do STR. O registro está em `docs/levantamento/2026-09-03-conversa-vice-diretora-str.md`. Os pontos centrais foram: várias associações já têm internet; o cadastro não pode ser refeito quando a pessoa sai e volta; o histórico da vida do associado e das contribuições precisa ser preservado; a ficha de inscrição e a carteirinha também são necessárias no dia a dia.
 
 ---
 
@@ -86,7 +88,11 @@ O sistema deverá permitir:
 * Atualização de dados cadastrais;
 * Controle da situação do associado;
 * Prevenção de cadastros duplicados;
-* Consulta do histórico do associado.
+* Consulta do histórico do associado;
+* Reativação de associado que retorna, **sem refazer o cadastro**;
+* Registro dos períodos de filiação (entrada, saída e retorno).
+
+Um associado que se desliga não deve ser apagado. O retorno reabre o cadastro existente e preserva o histórico anterior.
 
 #### Dados cadastrais previstos
 
@@ -98,6 +104,8 @@ O sistema deverá permitir:
 * Data de entrada na associação;
 * Situação do associado.
 
+Campos adicionais (RG/CTPS, estado civil, profissão, cônjuge, filhos, foto, número de inscrição) já aparecem nas carteirinhas geradas hoje e devem ser confirmados no próximo levantamento.
+
 #### Situação do associado
 
 Inicialmente, poderão ser utilizadas as seguintes situações:
@@ -105,6 +113,8 @@ Inicialmente, poderão ser utilizadas as seguintes situações:
 * **Ativo**
 * **Inativo**
 * **Desligado**
+
+**Desligado** ou **Inativo** não significa exclusão. A pessoa continua no sistema, com histórico visível, pronta para ser reativada se voltar.
 
 A estrutura poderá ser adaptada conforme os requisitos identificados durante o desenvolvimento.
 
@@ -168,15 +178,16 @@ O relacionamento principal da aplicação será:
 
 ```text
               ASSOCIADO
-                  │
-                  │ 1
-                  │
-                  │ N
-                  ▼
-            CONTRIBUIÇÃO
+             /         \
+            / 1         \ 1
+           /             \
+          / N             \ N
+         ▼                 ▼
+  PERÍODO DE           CONTRIBUIÇÃO
+   FILIAÇÃO
 ```
 
-Um associado poderá possuir várias contribuições registradas.
+Um associado poderá possuir vários períodos de filiação e várias contribuições. Sair e voltar não cria um novo associado.
 
 ### Entidade Associado
 
@@ -191,6 +202,19 @@ Associado
 ├── data_entrada
 └── situacao
 ```
+
+### Entidade Período de filiação
+
+```text
+PeriodoFiliacao
+├── id
+├── associado_id
+├── data_inicio
+├── data_fim
+└── motivo_saida
+```
+
+`data_fim` e `motivo_saida` ficam vazios enquanto o período estiver em curso. Um novo período começa quando o associado retorna.
 
 ### Entidade Contribuição
 
@@ -275,6 +299,16 @@ A estrutura definitiva poderá ser alterada conforme a arquitetura adotada duran
 | RF08   | Associar contribuição a um associado   |
 | RF09   | Consultar contribuições                |
 | RF10   | Visualizar histórico de contribuições  |
+| RF11   | Reativar associado sem recadastro      |
+| RF12   | Registrar períodos de filiação (saída e retorno) |
+| RF13   | Consultar histórico da vida associativa |
+
+Identificados no levantamento e ainda a posicionar na primeira versão ou em etapa seguinte:
+
+| Código | Requisito |
+| ------ | --------- |
+| RF14   | Gerar ou disponibilizar ficha de inscrição |
+| RF15   | Gerar carteirinha do associado |
 
 Os requisitos serão refinados durante as etapas de levantamento e desenvolvimento.
 
@@ -285,14 +319,15 @@ Os requisitos serão refinados durante as etapas de levantamento e desenvolvimen
 Entre os requisitos não funcionais inicialmente considerados estão:
 
 * Interface simples e intuitiva;
-* Sistema acessível por navegador;
+* Sistema acessível por navegador (várias associações já dispõem de internet);
 * Persistência segura das informações;
 * Integridade dos dados;
 * Organização e manutenção facilitadas;
 * Código versionado;
 * Utilização de tecnologias de código aberto;
 * Validação dos dados de entrada;
-* Prevenção de registros duplicados.
+* Prevenção de registros duplicados;
+* Histórico preservado mesmo após desligamento ou retorno do associado.
 
 ---
 
@@ -494,7 +529,11 @@ Ao final do projeto, espera-se produzir:
 
 ## 🚧 Limitações e fora do escopo
 
-A primeira versão será deliberadamente limitada aos módulos de **Associados** e **Contribuições**.
+A primeira versão será deliberadamente limitada aos módulos de **Associados** e **Contribuições**, incluindo reativação e histórico de filiação.
+
+A **ficha de inscrição** e a **carteirinha** foram pedidas no levantamento. Na secretaria observada, a ficha é feita no Word, impressa e preenchida à mão; a carteirinha feita no Word é trabalhosa. O CardForge foi uma solução local para gerar carteirinhas. Se o projeto avançar, a carteirinha entra como **módulo à parte**, depois de Associados e Contribuições.
+
+A secretaria pode emitir documentos, mas com **supervisão do presidente**. Associado comum, ao se desligar, muitas vezes não deixa registro; membro da diretoria costuma fazer carta de renúncia.
 
 Não fazem parte do escopo inicial:
 
@@ -506,7 +545,7 @@ Não fazem parte do escopo inicial:
 * Aplicativo móvel;
 * Gestão de projetos;
 * Controle de ofícios;
-* Gestão de documentos;
+* Gestão completa de documentos (além da ficha e da carteirinha, ainda em avaliação);
 * Portal público;
 * Suporte a múltiplas associações.
 
@@ -612,10 +651,12 @@ main
 
 ### Fase 1 — Levantamento
 
-* [ ] Conhecer o processo atual da associação
-* [ ] Levantar necessidades
-* [ ] Identificar problemas
-* [ ] Definir requisitos
+* [x] Primeira conversa com a vice-diretora do STR (3 set 2026)
+* [x] Identificar o problema de recadastro após saída e retorno
+* [ ] Conhecer o processo atual da ficha de inscrição e da carteirinha
+* [ ] Levantar necessidades restantes
+* [ ] Definir requisitos da ficha e da carteirinha
+* [ ] Confirmar campos cadastrais (RG/CTPS, família, foto)
 
 ### Fase 2 — Modelagem
 
@@ -632,7 +673,9 @@ main
 * [ ] Implementar atualização
 * [ ] Implementar controle de situação
 * [ ] Implementar prevenção de duplicidade
-* [ ] Implementar histórico
+* [ ] Implementar reativação sem recadastro
+* [ ] Implementar períodos de filiação
+* [ ] Implementar histórico da vida associativa
 
 ### Fase 4 — Contribuições
 
