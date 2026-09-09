@@ -54,7 +54,7 @@ Um associado que se desliga não deve ser apagado. Seu cadastro e histórico per
 ### Clonar o repositório
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
+git clone https://github.com/jphs682/gestao_associacao.git
 cd sistema-gestao-associacoes
 ```
 
