@@ -106,7 +106,7 @@ O desenvolvimento deverá respeitar as seguintes regras:
 |---|---|
 | Java 21 | Linguagem principal |
 | Spring Boot | Desenvolvimento do backend |
-| Spring Web | Criação de endpoints e APIs REST |
+| Spring Web / Spring MVC | Processamento de requisições e páginas web |
 | Spring Data JPA | Persistência e acesso aos dados |
 | Hibernate | Mapeamento objeto-relacional (ORM) |
 | PostgreSQL | Banco de dados relacional |
@@ -119,9 +119,9 @@ O desenvolvimento deverá respeitar as seguintes regras:
 | GitHub | Hospedagem do código e colaboração |
 | JUnit 5 | Testes automatizados |
 | Mockito | Apoio a testes unitários |
-| Flyway ou Liquibase | Versionamento das alterações do banco, a definir |
+| Flyway | Versionamento das alterações do banco |
 
-A seleção final das dependências e ferramentas poderá ser ajustada durante o desenvolvimento.
+A arquitetura inicial prevê Spring MVC com Thymeleaf e Bootstrap para entregar uma aplicação web responsiva na mesma aplicação Spring Boot. Uma API REST independente poderá ser considerada em evolução futura. As versões das dependências serão fixadas no `pom.xml` durante a implementação.
 
 ## Arquitetura
 
@@ -136,7 +136,7 @@ O projeto adotará uma arquitetura em camadas, buscando separar as responsabilid
 - **Exceptions:** centraliza o tratamento de erros.
 - **Auditoria:** registra operações relevantes, conforme as regras definidas.
 
-A aplicação será inicialmente estruturada como um monólito modular, evitando a complexidade desnecessária de microsserviços para o escopo inicial.
+A aplicação será inicialmente estruturada como um monólito modular, evitando a complexidade desnecessária de microsserviços para o escopo inicial. A interface será renderizada no servidor com Thymeleaf e adaptada a smartphones e computadores com Bootstrap. A arquitetura detalhada está em [Documento de Arquitetura de Software (DAS)](docs/arquitetura/DAS.md).
 
 ### Modelo de dados conceitual
 
@@ -158,6 +158,7 @@ A documentação do projeto está organizada por assunto dentro da pasta `docs/`
 
 - [Levantamento](docs/levantamento/) — necessidades identificadas junto à associação.
 - [Requisitos](docs/requisitos/) — requisitos funcionais, não funcionais e regras de negócio.
+- [Arquitetura](docs/arquitetura/) — Documento de Arquitetura de Software (DAS) e decisões arquiteturais.
 - [Modelagem](docs/modelagem/) — diagramas, entidades e relacionamentos.
 - [Desenvolvimento](docs/desenvolvimento/) — arquitetura, decisões técnicas e orientações de implementação.
 - [Testes](docs/testes/) — cenários, procedimentos e resultados de testes.
@@ -169,7 +170,7 @@ A documentação do projeto está organizada por assunto dentro da pasta `docs/`
 Para executar o projeto localmente, serão necessários:
 
 - Java Development Kit (JDK) 21.
-- Maven ou Maven Wrapper disponibilizado no repositório.
+- Maven (ou Maven Wrapper, quando disponibilizado no repositório).
 - PostgreSQL.
 - Git.
 
